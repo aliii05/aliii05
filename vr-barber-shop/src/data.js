@@ -18,12 +18,12 @@ export const business = {
 };
 
 export const media = {
-  logo: '/logo.svg', // replace with the original gold VR logo (svg/png)
-  heroVideo: '/media/walkthrough.mp4',
-  heroVideoMobile: '/media/walkthrough-mobile.mp4',
-  heroPoster: '/media/poster.jpg',
-  interior: '/media/interior.jpg',
-  entrance: '/media/entrance.jpg',
+  logo: 'logo.svg', // replace with the original gold VR logo (svg/png)
+  heroVideo: 'media/walkthrough.mp4',
+  heroVideoMobile: 'media/walkthrough-mobile.mp4',
+  heroPoster: 'media/poster.jpg',
+  interior: 'media/interior.jpg',
+  entrance: 'media/entrance.jpg',
 };
 
 export const nav = [
@@ -40,7 +40,7 @@ export const services = [
   { group: 'Additional Services', items: ['Hair colouring', 'Shampoo and conditioning', 'Waxing'] },
 ];
 
-// Add real barbers here. `photo` is a path in /public (e.g. '/media/team/sandy.jpg') or null.
+// Add real barbers here. `photo` is a path in /public (e.g. 'media/team/sandy.jpg') or null.
 export const team = [
   {
     name: 'Sandy',
