@@ -10,9 +10,8 @@ export default function Hero({ ready }: { ready: boolean }) {
   const reduced = useReducedMotion()
   const [i, setI] = useState(0)
   useEffect(() => {
-    if (reduced) return
     const t = setInterval(() => setI((n) => (n + 1) % gallery.length), 5000); return () => clearInterval(t)
-  }, [reduced])
+  }, [])
   const d = (ms: number) => ({ ['--d' as string]: `${ms}ms` })
   if (!ready) return <section id="top" className="min-h-[100svh]" />
   return (

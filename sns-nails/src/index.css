@@ -54,8 +54,11 @@ body { @apply bg-ivory text-espresso font-sans antialiased; font-weight: 300; }
 .accordion.open { grid-template-rows: 1fr; }
 .accordion > div { overflow: hidden; }
 
+/* Reduce Motion: keep gentle fades and the calm ambient videos, drop large movement. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-  [data-reveal] { opacity: 1; transform: none; }
-  .draw { stroke-dashoffset: 0; } .fill-in { fill-opacity: 1; }
+  html { scroll-behavior: auto; }
+  .float-a, .float-b, .kenburns, .marquee, .shine { animation: none !important; }
+  .rise { animation-name: fadeOnly; }
+  @keyframes fadeOnly { from { opacity: 0; } to { opacity: 1; } }
+  [data-reveal] { transform: none; }
 }

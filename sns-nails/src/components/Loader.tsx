@@ -5,9 +5,9 @@ export default function Loader({ onDone }: { onDone: () => void }) {
   const [out, setOut] = useState(false)
   const [gone, setGone] = useState(false)
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     const seen = sessionStorageSafe()
-    const wait = reduced || seen ? 300 : 2600
+    const wait = seen ? 300 : 2600
     let t1: number, t2: number
     const fonts = Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise((r) => setTimeout(r, 1200))])
     fonts.then(() => {
