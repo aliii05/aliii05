@@ -99,10 +99,10 @@ function Hero() {
       const W = c.width, H = c.height, iw = img.naturalWidth, ih = img.naturalHeight;
       const contain = Math.min(W / iw, H / ih), cover = Math.max(W / iw, H / ih);
       const portrait = H > W;
-      const s = portrait ? Math.min(cover, contain * 1.9) : cover; // don't over-crop the architecture on phones
+      const s = portrait ? Math.min(cover, contain * 2.3) : cover; // don't over-crop the architecture on phones
       const w = iw * s, h = ih * s;
       ctx.fillStyle = '#0d0c0a'; ctx.fillRect(0, 0, W, H);
-      ctx.drawImage(img, (W - w) / 2, portrait ? Math.max(0, (H - h) * 0.32) : (H - h) / 2, w, h);
+      ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
     };
     const load = (i) => new Promise((res) => {
       const im = new Image(); im.decoding = 'async';
@@ -149,33 +149,16 @@ function Hero() {
     setTimeout(() => api.current.replay?.(), 50);
   };
 
-  const fade = Math.max(0, 1 - progress * 3);
+  const fade = Math.max(0, 1 - progress * 6);
   return (
     <section id="home" className="hero" ref={wrap}>
       <div className="hero__stage">
         <canvas ref={cvs} className="hero__video" style={{ backgroundImage: `url(${media.heroPoster})` }} role="img" aria-label="Walkthrough of VR Barber Shop, from the entrance to the gold VR logo" />
-        <div className="hero__shade" style={{ opacity: 0.25 + fade * 0.75 }} />
-        <div className="hero__content" style={{ opacity: fade, transform: `translateY(${progress * -60}px)` }}>
-          <p className="eyebrow eyebrow--light">Wollert · Melbourne</p>
-          <h1 className="hero__title">
-            <span className="line"><span>Precision.</span></span>
-            <span className="line"><span>Style.</span></span>
-            <span className="line"><span><em>Confidence.</em></span></span>
-          </h1>
-          <p className="hero__lede">Experience premium barbering in the heart of Wollert.</p>
-          <div className="hero__rating">
-            <Stars value={B.rating} /> <strong>{B.rating}</strong> Google rating
-          </div>
-          <div className="hero__cta">
-            <a className="btn btn--gold" href={B.phoneHref}>Call Now</a>
-            <a className="btn btn--ghost" href={B.directionsUrl} target="_blank" rel="noopener">Get Directions</a>
-          </div>
-        </div>
+        <h1 className="sr-only">VR Barber Shop — Precision. Style. Confidence. Premium barbering in Wollert.</h1>
         <div className="hero__ui">
-          <div className="hero__scroll" style={{ opacity: fade }}><span />Scroll to walk in</div>
+          <div className="hero__scroll" style={{ opacity: fade }} aria-hidden="true"><span /></div>
           <button className="hero__replay" onClick={replay} aria-label="Replay walkthrough video">
             <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="currentColor"/></svg>
-            Replay
           </button>
           <div className="hero__progress"><span style={{ transform: `scaleX(${progress})` }} /></div>
         </div>
@@ -211,10 +194,7 @@ function Services() {
       <div className="wrap">
         <div className="services__top">
           <SectionHead num="01" eyebrow="Services" title="Crafted to Perfection" />
-          <p className="services__intro" data-reveal>
-            From sharp skin fades to the ritual of a traditional shave, every service is delivered with an eye for detail and
-            the time it deserves. Call us to discuss your cut or arrange an appointment.
-          </p>
+          <p className="services__intro" data-reveal>Every cut, shave and trim, delivered with precision.</p>
         </div>
         <div className="services__grid">
           {services.map((g, gi) => (
@@ -257,11 +237,7 @@ function Team() {
         <div className={`team__grid ${team.length ? '' : 'is-solo'}`}>
           <div className="team__intro" data-reveal>
             <p className="lead">
-              Behind every chair is a team that takes pride in the craft — professional, skilled and genuinely welcoming.
-            </p>
-            <p>
-              Our clients come back for consistent, precise work and an atmosphere that makes everyone feel at home, from
-              first-timers to the youngest members of the family.
+              A team that takes pride in the craft: professional, skilled and genuinely welcoming.
             </p>
           </div>
           {team.map((m) => (
@@ -345,9 +321,6 @@ function Visit() {
               <div><dt>Address</dt><dd>{B.address}</dd></div>
               <div><dt>Phone</dt><dd><a href={B.phoneHref}>{B.phoneDisplay}</a></dd></div>
             </dl>
-            <p className="visit__note">
-              {B.bookingUrl ? 'Book online or call us for appointment enquiries.' : 'For appointments and enquiries, please give us a call.'}
-            </p>
             <div className="visit__cta">
               {B.bookingUrl && <a className="btn btn--gold" href={B.bookingUrl}>Book Online</a>}
               <a className={`btn ${B.bookingUrl ? 'btn--dark' : 'btn--gold'}`} href={B.phoneHref}>Call {B.phoneDisplay}</a>
