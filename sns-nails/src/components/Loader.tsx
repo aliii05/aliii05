@@ -6,8 +6,7 @@ export default function Loader({ onDone }: { onDone: () => void }) {
   const [gone, setGone] = useState(false)
   useEffect(() => {
 
-    const seen = sessionStorageSafe()
-    const wait = seen ? 300 : 2600
+    const wait = 3400 // shown on every load
     let t1: number, t2: number
     const fonts = Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise((r) => setTimeout(r, 1200))])
     fonts.then(() => {
@@ -27,6 +26,3 @@ export default function Loader({ onDone }: { onDone: () => void }) {
   )
 }
 
-function sessionStorageSafe() {
-  try { const s = sessionStorage.getItem('sns-intro'); sessionStorage.setItem('sns-intro', '1'); return !!s } catch { return false }
-}
