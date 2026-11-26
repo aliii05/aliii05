@@ -14,7 +14,7 @@ npm run preview  # preview the build at http://localhost:4173
 Everything lives in **`src/config/site.ts`**: prices, services, opening hours, reviews, phone, address, Instagram and gallery images. The LocalBusiness structured data (JSON-LD) is built from the same file.
 
 ## Photos
-Put the five salon photos in `public/gallery/` as `nail-1.webp` … `nail-5.webp`. Until then, a branded placeholder shows in their place.
+Salon photos live in `public/gallery/` and are listed in `gallery` in `site.ts`. Any missing file shows a branded placeholder.
 Optimise them first (about 1200px on the long edge, WebP, quality around 78):
 ```bash
 npx sharp-cli -i photo.jpg -o public/gallery/nail-1.webp resize 1200 --format webp --quality 78

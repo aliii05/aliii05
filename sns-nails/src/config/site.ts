@@ -98,13 +98,11 @@ export const reviews = [
   { name: 'Neha', text: 'Absolutely love my nail extensions! The shape and finish are perfect, and the attention to detail was amazing.' },
 ]
 
-// Genuine salon photographs. Drop files into /public/gallery with these names.
+// Genuine salon photographs (originals, unaltered). Add more files to /public/gallery and list them here.
 export const gallery = [
-  { src: '/gallery/nail-1.webp', alt: 'Nail design by SNS Nails, Kalkallo — photo 1', tall: true },
-  { src: '/gallery/nail-2.webp', alt: 'Nail design by SNS Nails, Kalkallo — photo 2' },
-  { src: '/gallery/nail-3.webp', alt: 'Nail design by SNS Nails, Kalkallo — photo 3', tall: true },
-  { src: '/gallery/nail-4.webp', alt: 'Nail design by SNS Nails, Kalkallo — photo 4' },
-  { src: '/gallery/nail-5.webp', alt: 'Nail design by SNS Nails, Kalkallo — photo 5' },
+  { src: '/gallery/nail-1.webp', alt: 'Long coffin nails with nude base, black French tips and hand-painted white flowers with rhinestones', tall: true },
+  { src: '/gallery/nail-2.webp', alt: 'Short dusty-pink square nails with hand-painted white script initials', tall: true },
+  { src: '/gallery/nail-3.webp', alt: 'Short nude nails with white French tips and red heart accents', tall: true },
 ]
 
 // Optional AI hero video (only after approval). Leave empty to use the coded hero.
