@@ -21,7 +21,7 @@ export default function Reviews() {
           <p className="eyebrow !text-blush">Kind words</p>
           <div className="mt-6 flex items-center justify-center gap-5">
             <span className="h-display text-7xl sm:text-8xl">{business.rating.toFixed(1)}</span>
-            <span className="text-left text-sm text-ivory/70"><Stars className="text-blush" /><span className="mt-1 block">rating<br />on Google</span></span>
+            <span className="text-left text-sm text-ivory/70"><Stars className="text-blush" /><span className="mt-1 block">on Google<br />from {business.reviewsLabel} reviews</span></span>
           </div>
         </div>
 

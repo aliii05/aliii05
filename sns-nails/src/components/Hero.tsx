@@ -34,7 +34,7 @@ export default function Hero({ ready }: { ready: boolean }) {
           </div>
           <a href="#reviews" className="rise mt-10 inline-flex items-center gap-4" style={d(850)}>
             <span className="h-display text-4xl">{business.rating.toFixed(1)}</span>
-            <span className="text-[13px] leading-tight text-espresso/70"><Stars /><span className="mt-1 block">Google rating</span></span>
+            <span className="text-[13px] leading-tight text-espresso/70"><Stars /><span className="mt-1 block">Google rating · {business.reviewsLabel} reviews</span></span>
           </a>
         </div>
 
