@@ -254,7 +254,7 @@ function Team() {
     <section id="team" className="section team">
       <div className="wrap">
         <SectionHead num="02" eyebrow="Our Team" title="Meet the Professionals" />
-        <div className="team__grid">
+        <div className={`team__grid ${team.length ? '' : 'is-solo'}`}>
           <div className="team__intro" data-reveal>
             <p className="lead">
               Behind every chair is a team that takes pride in the craft — professional, skilled and genuinely welcoming.

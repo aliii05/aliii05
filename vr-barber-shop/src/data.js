@@ -19,7 +19,7 @@ export const business = {
 export const media = {
   logo: 'logo.svg', // replace with the original gold VR logo (svg/png)
   // Walkthrough as an image sequence (frames/d = desktop, frames/m = mobile), 001.webp … NNN.webp
-  heroFrames: { count: 132, desktop: 'frames/d/', mobile: 'frames/m/' },
+  heroFrames: { count: 118, desktop: 'frames/d/', mobile: 'frames/m/' },
   heroPoster: 'media/poster.jpg',
   interior: 'media/interior.jpg',
 };
@@ -40,18 +40,13 @@ export const services = [
 
 // Add real barbers here. `photo` is a path in /public (e.g. 'media/team/sandy.jpg') or null.
 export const team = [
-  {
-    name: 'Sandy',
-    role: 'Barber',
-    photo: null,
-    bio: 'Named again and again in our Google reviews, Sandy is known for her professionalism, skill and genuinely welcoming service — the kind of care that turns a first visit into a regular appointment.',
-  },
+  // Example — uncomment and edit to add a barber profile:
+  // { name: 'Name', role: 'Barber', photo: 'media/team/name.jpg', bio: 'Short introduction.' },
 ];
 
 // Set `fiveStarConfirmed: true` only once the individual Google rating is verified as 5 stars.
 export const reviews = [
   { name: 'Ameen', text: 'Best barber in the area. The whole team is professional, skilled and really knows what they’re doing.', fiveStarConfirmed: false },
-  { name: 'Russ', text: 'Sandy was amazing! The shop looks 🔥 and their prices were great.', fiveStarConfirmed: false },
   { name: 'Amrit', text: 'She is welcoming and very professional and talented. She is highly skilled and price is really reasonable.', fiveStarConfirmed: false },
   { name: 'Vivek', text: 'They are professional and do a fantastic job. Nice and patience with kids. Highly recommended.', fiveStarConfirmed: false },
   { name: 'Rix', text: 'Fantastic barber shop with great service and attention to detail.', fiveStarConfirmed: false },
