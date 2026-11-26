@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://snsnails.com.au/sitemap.xml
