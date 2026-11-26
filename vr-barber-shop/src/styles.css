@@ -387,3 +387,9 @@ body { background: var(--ivory); letter-spacing: .005em; }
 :root { --serif: 'Granjon', 'Cormorant Garamond', Georgia, serif; }
 h1, h2, h3, .head h2, .svc h3, .member h3, .quote p, .score__num, .visit dd, .menu a, .team__intro .lead { font-weight: 400; }
 .marquee em { font-style: normal; letter-spacing: .02em; }
+
+/* Preloader: logo, then wordmark */
+.preloader__logo { width: 150px; }
+.preloader__name { font: 400 clamp(20px, 5vw, 28px)/1 var(--serif); letter-spacing: .34em; padding-left: .34em; color: var(--ink); text-transform: uppercase; animation: fadeUp .8s .55s var(--ease) forwards; }
+.preloader__name::after { content: ''; display: block; width: 48px; height: 1px; margin: 18px auto 0; background: var(--gold); transform: scaleX(0); animation: lineIn .8s .9s var(--ease) forwards; }
+@keyframes lineIn { to { transform: scaleX(1); } }

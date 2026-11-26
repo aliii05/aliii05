@@ -18,17 +18,17 @@ function Preloader() {
   useEffect(() => {
     if (state !== 'show') return;
     const start = performance.now();
-    const min = reduced() ? 300 : 1000;
+    const min = reduced() ? 300 : 1700;
     let t;
     const finish = () => {
       t = setTimeout(() => setState('out'), Math.max(0, min - (performance.now() - start)));
     };
-    const cap = setTimeout(() => setState('out'), 1500);
+    const cap = setTimeout(() => setState('out'), 2300);
     if (document.readyState === 'complete') finish(); else window.addEventListener('load', finish, { once: true });
     return () => { clearTimeout(t); clearTimeout(cap); window.removeEventListener('load', finish); };
   }, [state]);
   useEffect(() => {
-    if (state === 'out') { const t = setTimeout(() => setState('gone'), 650); return () => clearTimeout(t); }
+    if (state === 'out') { window.__vrIntroDone = true; window.dispatchEvent(new Event('vr:intro-done')); const t = setTimeout(() => setState('gone'), 650); return () => clearTimeout(t); }
   }, [state]);
   if (state === 'gone') return null;
   return (
@@ -37,7 +37,7 @@ function Preloader() {
         <img src={media.logo} alt="" />
         <span className="preloader__sweep" />
       </div>
-      <p className="preloader__name">Barber Shop</p>
+      <p className="preloader__name">VR Barbershop</p>
     </div>
   );
 }
@@ -119,7 +119,8 @@ function Hero() {
 
     const tick = (t) => {
       if (auto) {
-        if (!autoStart) autoStart = t + 1300; // wait for the preloader
+        if (!window.__vrIntroDone) { raf = requestAnimationFrame(tick); return; } // hold first frame until the logo intro ends
+        if (!autoStart) autoStart = t + 350;
         target = Math.max(0, Math.min(count - 1, ((t - autoStart) / 1000) * 14));
         cur = target;
         if (target >= count - 1) auto = false;
@@ -361,15 +362,6 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
-        <div className="marquee" aria-hidden="true">
-          <div className="marquee__track">
-            {[0, 1].map((k) => (
-              <span key={k}>
-                {['Precision', 'Style', 'Confidence', 'Fades', 'Traditional Shaves', 'Beard Grooming', 'Wollert'].map((w) => <em key={w}>{w}<i>✦</i></em>)}
-              </span>
-            ))}
-          </div>
-        </div>
         <Services />
         <Gallery />
         <Team />
