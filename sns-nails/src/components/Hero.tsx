@@ -51,18 +51,7 @@ export default function Hero({ ready }: { ready: boolean }) {
             <div className="absolute inset-0 bg-gradient-to-t from-espresso/30 via-transparent to-transparent" />
             {!heroVideo.desktop && <p className="absolute bottom-6 left-0 right-0 text-center font-script text-3xl text-ivory drop-shadow">our work</p>}
           </div>
-          {heroVideo.desktop ? (
-            <a href="#gallery" aria-label="See our nail gallery" className="rise absolute -bottom-6 -left-6 block w-[44%] overflow-hidden rounded-[1.4rem] border-4 border-ivory bg-nude shadow-2xl sm:-left-14" style={d(600)}>
-              <div className="relative aspect-[3/4]">
-                {gallery.map((g, n) => (
-                  <div key={g.src} className={`absolute inset-0 transition-opacity duration-[1600ms] ${n === i ? 'opacity-100' : 'opacity-0'}`}>
-                    {(n === 0 || n === i || n === (i + 1) % gallery.length) && <Photo src={g.src} alt={g.alt} eager={n === 0} sizes="200px" className={`h-full w-full ${n === i ? 'kenburns' : ''}`} />}
-                  </div>
-                ))}
-                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/60 to-transparent pb-2 pt-6 text-center font-script text-xl text-ivory">our work</span>
-              </div>
-            </a>
-          ) : <>
+          {!heroVideo.desktop && <>
           <Bottle className="float-a absolute -left-6 top-[18%] w-16 drop-shadow-2xl sm:-left-12 sm:w-24" />
           <Bottle hue="#E6D3CA" deep="#c7a99a" className="float-b absolute -right-4 bottom-[14%] w-14 drop-shadow-2xl sm:-right-10 sm:w-20" />
           </>}
