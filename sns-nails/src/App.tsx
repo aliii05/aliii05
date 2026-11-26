@@ -9,6 +9,7 @@ import Booking from './components/Booking'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import StickyBook from './components/StickyBook'
+import Band from './components/Band'
 import { Selection, useReveal } from './lib'
 
 const words = ['BIAB', 'Gel-X', 'Chrome', 'French', 'Cat eye', 'Ombre', '3D art', 'Shellac']
@@ -30,6 +31,7 @@ export default function App() {
           </div>
         </div>
         <Services sel={sel} setSel={setSel} />
+        <Band />
         <Gallery />
         <Reviews />
         <Booking sel={sel} setSel={setSel} />

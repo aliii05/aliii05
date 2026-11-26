@@ -105,5 +105,7 @@ export const gallery = [
   { src: '/gallery/nail-3.webp', alt: 'Short nude nails with white French tips and red heart accents', tall: true },
 ]
 
-// Optional AI hero video (only after approval). Leave empty to use the coded hero.
-export const heroVideo = { desktop: '', mobile: '', poster: '' }
+// AI-generated ambience videos (OpenArt, approved). These are product renders, not client work.
+// Set `desktop` to '' to fall back to the coded hero with floating SVG bottles.
+export const heroVideo = { desktop: '/media/hero-bottles.mp4', mobile: '/media/hero-bottles-sm.mp4', poster: '/media/hero-bottles.webp' }
+export const bandVideo = { desktop: '/media/band.mp4', mobile: '/media/band-sm.mp4', poster: '/media/band.webp' }

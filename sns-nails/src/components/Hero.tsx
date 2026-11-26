@@ -4,12 +4,13 @@ import { useReducedMotion } from '../lib'
 import Photo from './Photo'
 import Bottle from './Bottle'
 import Stars from './Stars'
+import SmartVideo from './SmartVideo'
 
 export default function Hero({ ready }: { ready: boolean }) {
   const reduced = useReducedMotion()
   const [i, setI] = useState(0)
   useEffect(() => {
-    if (reduced || heroVideo.desktop) return
+    if (reduced) return
     const t = setInterval(() => setI((n) => (n + 1) % gallery.length), 5000); return () => clearInterval(t)
   }, [reduced])
   const d = (ms: number) => ({ ['--d' as string]: `${ms}ms` })
@@ -41,10 +42,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         <div className="relative order-1 mx-auto w-[72%] max-w-[460px] md:order-2 md:w-full">
           <div className="rise relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2rem] bg-nude shadow-[0_40px_80px_-30px_rgba(73,51,44,.45)]" style={d(150)}>
             {heroVideo.desktop ? (
-              <video className="h-full w-full object-cover" autoPlay muted loop playsInline poster={heroVideo.poster} preload="metadata">
-                <source media="(max-width: 767px)" src={heroVideo.mobile || heroVideo.desktop} type="video/mp4" />
-                <source src={heroVideo.desktop} type="video/mp4" />
-              </video>
+              <SmartVideo v={heroVideo} reduced={reduced} className="h-full w-full object-cover" />
             ) : gallery.map((g, n) => (
               <div key={g.src} className={`absolute inset-0 transition-opacity duration-[1600ms] ${n === i ? 'opacity-100' : 'opacity-0'}`}>
                 {(n === 0 || n === i || n === (i + 1) % gallery.length) && <Photo src={g.src} alt={g.alt} eager={n === 0} className={`h-full w-full ${n === i ? 'kenburns' : ''}`} />}
@@ -52,10 +50,23 @@ export default function Hero({ ready }: { ready: boolean }) {
             ))}
             <div className="shine" />
             <div className="absolute inset-0 bg-gradient-to-t from-espresso/30 via-transparent to-transparent" />
-            <p className="absolute bottom-6 left-0 right-0 text-center font-script text-3xl text-ivory drop-shadow">our work</p>
+            {!heroVideo.desktop && <p className="absolute bottom-6 left-0 right-0 text-center font-script text-3xl text-ivory drop-shadow">our work</p>}
           </div>
+          {heroVideo.desktop ? (
+            <a href="#gallery" aria-label="See our nail gallery" className="rise absolute -bottom-6 -left-6 block w-[44%] overflow-hidden rounded-[1.4rem] border-4 border-ivory bg-nude shadow-2xl sm:-left-14" style={d(600)}>
+              <div className="relative aspect-[3/4]">
+                {gallery.map((g, n) => (
+                  <div key={g.src} className={`absolute inset-0 transition-opacity duration-[1600ms] ${n === i ? 'opacity-100' : 'opacity-0'}`}>
+                    {(n === 0 || n === i || n === (i + 1) % gallery.length) && <Photo src={g.src} alt={g.alt} eager={n === 0} sizes="200px" className={`h-full w-full ${n === i ? 'kenburns' : ''}`} />}
+                  </div>
+                ))}
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/60 to-transparent pb-2 pt-6 text-center font-script text-xl text-ivory">our work</span>
+              </div>
+            </a>
+          ) : <>
           <Bottle className="float-a absolute -left-6 top-[18%] w-16 drop-shadow-2xl sm:-left-12 sm:w-24" />
           <Bottle hue="#E6D3CA" deep="#c7a99a" className="float-b absolute -right-4 bottom-[14%] w-14 drop-shadow-2xl sm:-right-10 sm:w-20" />
+          </>}
           <span aria-hidden className="float-b absolute right-[12%] top-[6%] h-3 w-3 rounded-full bg-blush" />
           <span aria-hidden className="float-a absolute bottom-[4%] left-[18%] h-2 w-2 rounded-full bg-rose" />
         </div>
