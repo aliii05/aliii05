@@ -19,11 +19,10 @@ export const business = {
 
 export const media = {
   logo: 'logo.svg', // replace with the original gold VR logo (svg/png)
-  heroVideo: 'media/walkthrough.mp4',
-  heroVideoMobile: 'media/walkthrough-mobile.mp4',
+  // Walkthrough as an image sequence (frames/d = desktop, frames/m = mobile), 001.webp … NNN.webp
+  heroFrames: { count: 132, desktop: 'frames/d/', mobile: 'frames/m/' },
   heroPoster: 'media/poster.jpg',
   interior: 'media/interior.jpg',
-  entrance: 'media/entrance.jpg',
 };
 
 export const nav = [

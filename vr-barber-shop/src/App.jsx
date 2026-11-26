@@ -46,7 +46,7 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > window.innerHeight * 0.6);
+    const on = () => { const h = document.querySelector('.hero'); setScrolled(window.scrollY > (h ? h.offsetHeight - window.innerHeight * 1.05 : 200)); };
     on(); window.addEventListener('scroll', on, { passive: true });
     return () => window.removeEventListener('scroll', on);
   }, []);
@@ -75,61 +75,85 @@ function Nav() {
   );
 }
 
-/* Scroll-driven cinematic hero: the video autoplays once, then the scroll position scrubs through it. */
+/* Scroll-driven cinematic hero: frames autoplay once, then the scroll position scrubs through them (canvas = smooth on phones). */
 function Hero() {
   const wrap = useRef(null);
-  const vid = useRef(null);
+  const cvs = useRef(null);
+  const api = useRef({});
   const [progress, setProgress] = useState(0);
-  const [ended, setEnded] = useState(false);
-  const scrubbing = useRef(false);
 
   useEffect(() => {
-    const v = vid.current;
-    if (!v) return;
-    if (reduced()) { v.removeAttribute('autoplay'); v.pause(); }
-    let target = 0, raf = 0;
-    const tick = () => {
-      if (scrubbing.current && v.duration) {
-        const diff = target - v.currentTime;
-        if (Math.abs(diff) > 0.03) v.currentTime += diff * 0.25;
-      }
+    const { count, desktop, mobile } = media.heroFrames;
+    const dir = window.innerWidth <= 760 ? mobile : desktop;
+    const c = cvs.current, ctx = c.getContext('2d');
+    const imgs = new Array(count);
+    let cur = 0, target = 0, drawn = -1, raf = 0, auto = !reduced(), autoStart = 0, scrolled = false;
+
+    const size = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      c.width = c.clientWidth * dpr; c.height = c.clientHeight * dpr; drawn = -1;
+    };
+    const nearest = (i) => { for (let d = 0; d < count; d++) { if (imgs[i - d]?.ok) return imgs[i - d]; if (imgs[i + d]?.ok) return imgs[i + d]; } };
+    const draw = (i) => {
+      const img = nearest(i); if (!img) return;
+      const W = c.width, H = c.height, iw = img.naturalWidth, ih = img.naturalHeight;
+      const contain = Math.min(W / iw, H / ih), cover = Math.max(W / iw, H / ih);
+      const portrait = H > W;
+      const s = portrait ? Math.min(cover, contain * 1.9) : cover; // don't over-crop the architecture on phones
+      const w = iw * s, h = ih * s;
+      ctx.fillStyle = '#0d0c0a'; ctx.fillRect(0, 0, W, H);
+      ctx.drawImage(img, (W - w) / 2, portrait ? Math.max(0, (H - h) * 0.32) : (H - h) / 2, w, h);
+    };
+    const load = (i) => new Promise((res) => {
+      const im = new Image(); im.decoding = 'async';
+      im.onload = () => { im.ok = true; drawn = -1; res(); }; im.onerror = res;
+      im.src = `${dir}${String(i + 1).padStart(3, '0')}.webp`; imgs[i] = im;
+    });
+    // first frame, then every 4th (quick coarse playback), then the rest
+    load(0).then(async () => {
+      const order = [];
+      for (let i = 4; i < count; i += 4) order.push(i);
+      for (let i = 1; i < count; i++) if (i % 4) order.push(i);
+      for (let k = 0; k < order.length; k += 6) await Promise.all(order.slice(k, k + 6).map(load));
+    });
+
+    const tick = (t) => {
+      if (auto) {
+        if (!autoStart) autoStart = t;
+        target = Math.min(count - 1, ((t - autoStart) / 1000) * 14);
+        cur = target;
+        if (target >= count - 1) auto = false;
+      } else cur += (target - cur) * 0.2;
+      const f = Math.round(cur);
+      if (f !== drawn) { draw(f); drawn = f; }
       raf = requestAnimationFrame(tick);
     };
     const onScroll = () => {
       const el = wrap.current;
-      const total = el.offsetHeight - window.innerHeight;
-      const p = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / total));
+      const p = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / (el.offsetHeight - window.innerHeight)));
       setProgress(p);
-      if (reduced() || !v.duration) return;
-      if (p > 0.01) {
-        if (!scrubbing.current) { scrubbing.current = true; v.pause(); }
-        target = p * (v.duration - 0.05);
-      }
+      if (reduced()) return;
+      if (p > 0.005 || scrolled) { scrolled = true; auto = false; target = p * (count - 1); }
     };
-    onScroll();
+    api.current.replay = () => { scrolled = false; auto = !reduced(); autoStart = 0; cur = 0; drawn = -1; if (!auto) target = count - 1; };
+
+    size(); if (reduced()) { target = cur = count - 1; }
+    window.addEventListener('resize', size);
     window.addEventListener('scroll', onScroll, { passive: true });
     raf = requestAnimationFrame(tick);
-    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
+    return () => { window.removeEventListener('resize', size); window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
   }, []);
 
   const replay = () => {
-    const v = vid.current;
-    scrubbing.current = false;
-    window.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' });
-    v.currentTime = 0; setEnded(false); v.play().catch(() => {});
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    setTimeout(() => api.current.replay?.(), 50);
   };
 
   const fade = Math.max(0, 1 - progress * 3);
   return (
     <section id="home" className="hero" ref={wrap}>
-      <div className="hero__stage">
-        <video
-          ref={vid} className="hero__video" autoPlay muted playsInline preload="auto"
-          poster={media.heroPoster} onEnded={() => setEnded(true)} aria-label="Walkthrough of VR Barber Shop"
-        >
-          <source src={media.heroVideoMobile} type="video/mp4" media="(max-width: 760px)" />
-          <source src={media.heroVideo} type="video/mp4" />
-        </video>
+      <div className="hero__stage" style={{ backgroundImage: `url(${media.heroPoster})` }}>
+        <canvas ref={cvs} className="hero__video" role="img" aria-label="Walkthrough of VR Barber Shop, from the entrance to the gold VR logo" />
         <div className="hero__shade" style={{ opacity: 0.25 + fade * 0.75 }} />
         <div className="hero__content" style={{ opacity: fade, transform: `translateY(${progress * -60}px)` }}>
           <p className="eyebrow eyebrow--light">Wollert · Melbourne</p>
