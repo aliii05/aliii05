@@ -10,7 +10,6 @@ export const business = {
   phoneDisplay: '+61 469 360 879',
   phone: '+61469360879',
   rating: 5.0,
-  reviewCount: 30,
   url: 'https://snsnails.com.au', // update once the domain is known
   geo: { lat: -37.5314, lng: 144.9537 }, // approximate — confirm on Google Maps
 }
