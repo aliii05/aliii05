@@ -9,7 +9,6 @@ export const business = {
   address: { street: '30 Stilt St', suburb: 'Kalkallo', state: 'VIC', postcode: '3064', country: 'AU' },
   phoneDisplay: '+61 469 360 879',
   phone: '+61469360879',
-  instagram: 'snsnails3',
   rating: 5.0,
   reviewCount: 30,
   url: 'https://snsnails.com.au', // update once the domain is known

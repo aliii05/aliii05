@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { gallery, business } from '../config/site'
+import { gallery } from '../config/site'
 import Photo from './Photo'
 import { useReducedMotion } from '../lib'
 import SmartVideo from './SmartVideo'
@@ -24,7 +24,7 @@ export default function Gallery() {
             <p className="eyebrow">The gallery</p>
             <h2 className="h-display mt-4 text-[clamp(2.6rem,6vw,4.8rem)]">Real nails, <span className="font-script text-rose">real clients</span></h2>
           </div>
-          <p className="max-w-sm text-espresso/70">Genuine designs created in our Kalkallo studio. Follow <a className="underline decoration-blush underline-offset-4" href={`https://www.instagram.com/${business.instagram}/`} target="_blank" rel="noopener">@{business.instagram}</a> for the latest sets.</p>
+          <p className="max-w-sm text-espresso/70">Genuine designs created in our Kalkallo studio.</p>
         </header>
 
         <div className="mt-14 columns-2 gap-3 sm:gap-5 lg:columns-3">

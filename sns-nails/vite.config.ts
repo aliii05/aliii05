@@ -20,7 +20,6 @@ const jsonLd = {
   },
   geo: { '@type': 'GeoCoordinates', latitude: business.geo.lat, longitude: business.geo.lng },
   areaServed: ['Kalkallo', 'Donnybrook', 'Mickleham', 'Beveridge', 'Craigieburn', 'Wollert'],
-  sameAs: [`https://www.instagram.com/${business.instagram}/`],
   aggregateRating: { '@type': 'AggregateRating', ratingValue: business.rating.toFixed(1), reviewCount: business.reviewCount, bestRating: '5' },
   openingHoursSpecification: hours.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: dayMap[h.short], opens: h.open, closes: h.close })),
   hasOfferCatalog: {

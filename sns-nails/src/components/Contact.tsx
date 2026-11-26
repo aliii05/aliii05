@@ -16,7 +16,6 @@ export default function Contact() {
             <a className="btn-dark col-span-2" href={mapsDirections} target="_blank" rel="noopener">Get Directions</a>
             <a className="btn-light" href={`tel:${business.phone}`}>Call</a>
             <a className="btn-light" href={`sms:${business.phone}`}>Text</a>
-            <a className="btn-light col-span-2" href={`https://www.instagram.com/${business.instagram}/`} target="_blank" rel="noopener">Instagram @{business.instagram}</a>
           </div>
           <table className="mt-10 w-full max-w-sm text-[15px]">
             <caption className="eyebrow mb-3 text-left">Opening hours</caption>
