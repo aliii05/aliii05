@@ -98,10 +98,11 @@ export const reviews = [
   { name: 'Neha', text: 'Absolutely love my nail extensions! The shape and finish are perfect, and the attention to detail was amazing.' },
 ]
 
-// Genuine salon photographs (originals, unaltered). Add more files to /public/gallery and list them here.
+// Genuine salon photographs (originals, unaltered). Optional `clip` = AI camera-move of that
+// exact photo (OpenArt, trimmed to frames verified against the original); always labelled on-site. Add more files to /public/gallery and list them here.
 export const gallery = [
-  { src: '/gallery/nail-1.webp', alt: 'Long coffin nails with nude base, black French tips and hand-painted white flowers with rhinestones', tall: true },
-  { src: '/gallery/nail-2.webp', alt: 'Short dusty-pink square nails with hand-painted white script initials', tall: true },
+  { src: '/gallery/nail-1.webp', alt: 'Long coffin nails with nude base, black French tips and hand-painted white flowers with rhinestones', tall: true, clip: '/media/nail-1-clip.mp4' },
+  { src: '/gallery/nail-2.webp', alt: 'Short dusty-pink square nails with hand-painted white script initials', tall: true, clip: '/media/nail-2-clip.mp4' },
   { src: '/gallery/nail-3.webp', alt: 'Short nude nails with white French tips and red heart accents', tall: true },
 ]
 
