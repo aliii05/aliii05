@@ -388,6 +388,15 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <div className="marquee" aria-hidden="true">
+          <div className="marquee__track">
+            {[0, 1].map((k) => (
+              <span key={k}>
+                {['Precision', 'Style', 'Confidence', 'Fades', 'Traditional Shaves', 'Beard Grooming', 'Wollert'].map((w) => <em key={w}>{w}<i>✦</i></em>)}
+              </span>
+            ))}
+          </div>
+        </div>
         <Services />
         <Gallery />
         <Team />

@@ -331,3 +331,42 @@ canvas.hero__video { background: #0d0c0a center / cover no-repeat; }
   .sticky-call { display: none; }
   body { padding-bottom: 0; }
 }
+
+/* ── Luxury refinement: black + warm stone (#F3EFED) with restrained gold ── */
+:root {
+  --ivory: #f3efed;
+  --ivory-2: #e9e3df;
+  --white: #f8f6f4;
+  --ink: #000000;
+  --ink-2: #4d4845;
+  --line: rgba(0, 0, 0, 0.1);
+}
+body { background: var(--ivory); letter-spacing: .005em; }
+.nav.is-solid { background: rgba(243, 239, 237, .88); }
+.head h2, .hero__title { letter-spacing: -0.02em; }
+.head h2 { font-weight: 400; }
+.services { background: var(--ivory); }
+.gallery { background: var(--ivory); }
+.team { background: var(--ivory-2); }
+.reviews, .footer { background: #000; }
+.btn--gold { background: linear-gradient(120deg, #9c7a3c, #c9a45c 45%, #e6cf98 70%, #c9a45c); }
+
+/* Marquee band */
+.marquee { overflow: hidden; background: #000; color: var(--ivory); border-block: 1px solid rgba(201, 164, 92, .35); padding: 22px 0; }
+.marquee__track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+.marquee__track span { display: flex; }
+.marquee em { font: italic 400 clamp(26px, 3.4vw, 46px)/1 var(--serif); white-space: nowrap; display: flex; align-items: center; }
+.marquee i { font-style: normal; font-size: .38em; color: var(--gold-hi); margin: 0 .9em; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Footer on black */
+.footer { color: var(--ivory); border-top-color: rgba(201, 164, 92, .35); }
+.footer__contact p, .footer__copy { color: rgba(243, 239, 237, .6); }
+.footer nav a:hover, .footer__contact a:hover { color: var(--gold-hi); }
+.footer__copy { border-top-color: rgba(243, 239, 237, .12); }
+
+/* Gallery hover: slow zoom + gold hairline */
+.gallery__item { position: relative; }
+.gallery__item::after { content: ''; position: absolute; inset: 10px; border: 1px solid rgba(230, 207, 152, 0); transition: border-color .8s var(--ease); pointer-events: none; }
+.gallery__item:hover::after { border-color: rgba(230, 207, 152, .7); }
+.gallery__item img { transition: transform 1.6s var(--ease); }
