@@ -32,6 +32,7 @@ export default function Gallery() {
             <button key={g.src} onClick={() => setIdx(i)} data-reveal style={{ ['--d' as string]: `${(i % 3) * 120}ms` }}
               className="group relative mb-3 block w-full overflow-hidden rounded-[1.5rem] sm:mb-5" aria-label={`View ${g.alt} full screen`}>
               <Photo src={g.src} alt={g.alt} sizes="(max-width: 1024px) 50vw, 33vw" className={`w-full transition duration-[1400ms] ease-out group-hover:scale-[1.06] ${g.tall ? 'aspect-[3/4]' : 'aspect-square'}`} />
+              {'motion' in g && g.motion && <><span aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden"><Photo src={g.src} alt="" sizes="(max-width: 1024px) 50vw, 33vw" className="kenburns h-full w-full" /></span><span aria-hidden className="shine pointer-events-none" /></>}
               {g.clip && <SmartVideo v={{ desktop: g.clip, poster: g.src }} reduced={reduced} className="pointer-events-none absolute inset-0 h-full w-full object-cover transition duration-[1400ms] ease-out group-hover:scale-[1.06]" />}
               {g.clip && <span className="absolute left-3 top-3 rounded-full bg-ivory/85 px-3 py-1 text-[10px] uppercase tracking-[.2em] text-espresso">Animated photo</span>}
               <span className="absolute inset-0 bg-espresso/0 transition duration-700 group-hover:bg-espresso/15" />
