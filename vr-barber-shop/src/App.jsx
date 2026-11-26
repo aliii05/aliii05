@@ -119,8 +119,8 @@ function Hero() {
 
     const tick = (t) => {
       if (auto) {
-        if (!autoStart) autoStart = t;
-        target = Math.min(count - 1, ((t - autoStart) / 1000) * 14);
+        if (!autoStart) autoStart = t + 1300; // wait for the preloader
+        target = Math.max(0, Math.min(count - 1, ((t - autoStart) / 1000) * 14));
         cur = target;
         if (target >= count - 1) auto = false;
       } else cur += (target - cur) * 0.2;
@@ -152,8 +152,8 @@ function Hero() {
   const fade = Math.max(0, 1 - progress * 3);
   return (
     <section id="home" className="hero" ref={wrap}>
-      <div className="hero__stage" style={{ backgroundImage: `url(${media.heroPoster})` }}>
-        <canvas ref={cvs} className="hero__video" role="img" aria-label="Walkthrough of VR Barber Shop, from the entrance to the gold VR logo" />
+      <div className="hero__stage">
+        <canvas ref={cvs} className="hero__video" style={{ backgroundImage: `url(${media.heroPoster})` }} role="img" aria-label="Walkthrough of VR Barber Shop, from the entrance to the gold VR logo" />
         <div className="hero__shade" style={{ opacity: 0.25 + fade * 0.75 }} />
         <div className="hero__content" style={{ opacity: fade, transform: `translateY(${progress * -60}px)` }}>
           <p className="eyebrow eyebrow--light">Wollert · Melbourne</p>
