@@ -6,7 +6,6 @@
 export const business = {
   name: 'VR Barber Shop',
   rating: 4.8,
-  reviewCount: 126,
   address: '43 Baltrum Dr, Wollert VIC 3750',
   phoneDisplay: '(03) 9438 2442',
   phoneHref: 'tel:+61394382442',
@@ -57,4 +56,11 @@ export const reviews = [
   { name: 'Vivek', text: 'They are professional and do a fantastic job. Nice and patience with kids. Highly recommended.', fiveStarConfirmed: false },
   { name: 'Rix', text: 'Fantastic barber shop with great service and attention to detail.', fiveStarConfirmed: false },
   { name: 'Satnam', text: 'The stylist was knowledgeable and attentive, and the salon was clean and well-organized.', fiveStarConfirmed: false },
+];
+
+// Photos of the shop, shown in "The Space" gallery. Add or reorder freely (paths are in /public).
+export const gallery = [
+  { src: 'media/gallery/stations.webp', alt: 'Three styling stations with white and gold barber chairs and illuminated mirrors', wide: true },
+  { src: 'media/gallery/lounge.webp', alt: 'Waiting lounge with pool table, gold pendant light and barber stations' },
+  { src: 'media/gallery/vr-wall.webp', alt: 'Gold VR lettering above the lounge sofas beneath a sculptural gold light' },
 ];

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { business as B, media, nav, services, team, reviews } from './data.js';
+import { business as B, media, nav, services, team, reviews, gallery } from './data.js';
 
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -13,11 +13,10 @@ function Stars({ value = 5, size = 14 }) {
 
 function Preloader() {
   const [state, setState] = useState(() => {
-    try { return sessionStorage.getItem('vr-intro') ? 'gone' : 'show'; } catch { return 'show'; }
+    return 'show';
   });
   useEffect(() => {
     if (state !== 'show') return;
-    try { sessionStorage.setItem('vr-intro', '1'); } catch {}
     const start = performance.now();
     const min = reduced() ? 300 : 1000;
     let t;
@@ -38,6 +37,7 @@ function Preloader() {
         <img src={media.logo} alt="" />
         <span className="preloader__sweep" />
       </div>
+      <p className="preloader__name">Barber Shop</p>
     </div>
   );
 }
@@ -164,7 +164,7 @@ function Hero() {
           </h1>
           <p className="hero__lede">Experience premium barbering in the heart of Wollert.</p>
           <div className="hero__rating">
-            <Stars value={B.rating} /> <strong>{B.rating}</strong> Google rating <i /> {B.reviewCount} Google reviews
+            <Stars value={B.rating} /> <strong>{B.rating}</strong> Google rating
           </div>
           <div className="hero__cta">
             <a className="btn btn--gold" href={B.phoneHref}>Call Now</a>
@@ -232,6 +232,23 @@ function Services() {
   );
 }
 
+function Gallery() {
+  return (
+    <section id="space" className="section gallery">
+      <div className="wrap">
+        <SectionHead num="—" eyebrow="The Space" title="Designed for the Details" />
+        <div className="gallery__grid">
+          {gallery.map((g, i) => (
+            <figure key={g.src} className={`gallery__item reveal-img ${g.wide ? 'is-wide' : ''}`} data-reveal style={{ '--d': `${i * 120}ms` }}>
+              <img src={g.src} alt={g.alt} loading="lazy" />
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Team() {
   return (
     <section id="team" className="section team">
@@ -285,7 +302,7 @@ function Reviews() {
           <div className="score" data-reveal>
             <div className="score__num">{B.rating}<small>/5</small></div>
             <Stars value={B.rating} size={20} />
-            <p>Average Google rating from <strong>{B.reviewCount} reviews</strong></p>
+            <p>Average rating on <strong>Google</strong></p>
             <a className="link" href={B.reviewsUrl} target="_blank" rel="noopener">Read all Google reviews →</a>
           </div>
           <div className="carousel" data-reveal onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
@@ -372,6 +389,7 @@ export default function App() {
       <main>
         <Hero />
         <Services />
+        <Gallery />
         <Team />
         <Reviews />
         <Visit />
