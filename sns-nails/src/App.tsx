@@ -12,7 +12,6 @@ import StickyBook from './components/StickyBook'
 import Band from './components/Band'
 import { Selection, useReveal } from './lib'
 
-const words = ['BIAB', 'Gel-X', 'Chrome', 'French', 'Cat eye', 'Ombre', '3D art', 'Shellac']
 
 export default function App() {
   const [ready, setReady] = useState(false)
@@ -25,11 +24,6 @@ export default function App() {
       <Nav />
       <main>
         <Hero ready={ready} />
-        <div aria-hidden className="overflow-hidden border-y border-espresso/10 py-5">
-          <div className="marquee flex w-max gap-12 whitespace-nowrap font-serif text-3xl italic text-espresso/70">
-            {[...words, ...words].map((w, i) => <span key={i} className="flex items-center gap-12">{w}<span className="text-blush">✦</span></span>)}
-          </div>
-        </div>
         <Services sel={sel} setSel={setSel} />
         <Band />
         <Gallery />
