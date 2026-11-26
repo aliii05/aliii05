@@ -15,7 +15,7 @@ export default function Nav() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition duration-500 ${solid || open ? 'bg-ivory/90 shadow-[0_1px_0_rgba(73,51,44,.08)] backdrop-blur-md' : ''}`}>
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-8 md:h-20" aria-label="Main">
-        <a href="#top" aria-label="SNS Nails home" className="w-24 md:w-28"><Logo /></a>
+        <a href="#top" aria-label="SNS Nails home" className="w-28 md:w-32"><Logo /></a>
         <ul className="hidden items-center gap-10 text-[12px] uppercase tracking-[.24em] md:flex">
           {links.map(([l, h]) => <li key={h}><a href={h} className="transition hover:text-rose">{l}</a></li>)}
         </ul>
