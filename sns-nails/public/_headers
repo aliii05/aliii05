@@ -4,3 +4,5 @@
   Cache-Control: public, max-age=2592000
 /gallery/*
   Cache-Control: public, max-age=2592000
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
